@@ -1,0 +1,12 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+   <soap:Header/>
+   <soap:Body>
+      <Account>
+         <AccountId xmlns="http://ws.apache.org/ns/synapse">1234</AccountId>
+         <UserName xmlns="http://ws.apache.org/ns/synapse">tpatil</UserName>
+         <EmailAddress xmlns="http://ws.apache.org/ns/synapse">tarakeshwar.patil@gmail.com</EmailAddress>
+         <Status xmlns="http://ws.apache.org/ns/synapse">Active</Status>
+         <Processed xmlns="http://ws.apache.org/ns/synapse">True</Processed>
+      </Account>
+   </soap:Body>
+</soap:Envelope>

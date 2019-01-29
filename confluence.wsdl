@@ -1,0 +1,84 @@
+<wsdl:definitions   xmlns:ns="http://ws.apache.org/ns/synapse" xmlns:xs = "http://www.w3.org/2001/XMLSchema" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.apache.org/axis2" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ws.apache.org/axis2">
+<wsdl:types></wsdl:types>
+<wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified">
+        <xs:element name="Account">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="AccountId" type="xs:string" />
+                    <xs:element minOccurs="0" name="UserName" type="xs:string" />
+                    <xs:element minOccurs="0" name="EmailAddress" type="xs:string" />
+                    <xs:element minOccurs="0" name="Status" type="xs:string" />
+                    <xs:element minOccurs="0" name="Processed" type="xs:string" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:schema>
+</wsdl:types>
+<wsdl:message name="in">
+    <wsdl:part name="parameters" element="Account" />
+</wsdl:message>
+<wsdl:message name="out"></wsdl:message>
+<wsdl:portType name="trPortType">
+<wsdl:operation name="mediate">
+<wsdl:input message="tns:in" wsaw:Action="urn:mediate"></wsdl:input>
+<wsdl:output message="tns:out" wsaw:Action="urn:mediateResponse"></wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="trSoap11Binding" type="tns:trPortType">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="mediate">
+<soap:operation soapAction="urn:mediate" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="trHttpBinding" type="tns:trPortType">
+<http:binding verb="POST"/>
+<wsdl:operation name="mediate">
+<http:operation location="mediate"/>
+<wsdl:input>
+<mime:content part="parameters" type="text/xml"/>
+</wsdl:input>
+<wsdl:output>
+<mime:content part="parameters" type="text/xml"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="trSoap12Binding" type="tns:trPortType">
+<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="mediate">
+<soap12:operation soapAction="urn:mediate" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="tr">
+<wsdl:port name="trHttpsSoap12Endpoint" binding="tns:trSoap12Binding">
+<soap12:address location="http://localhost:8099/mocktrSoap12Binding"/>
+</wsdl:port>
+<wsdl:port name="trHttpEndpoint" binding="tns:trHttpBinding">
+<http:address location="http://tpatil.mynet:8281/services/tr.trHttpEndpoint"/>
+</wsdl:port>
+<wsdl:port name="trHttpsEndpoint" binding="tns:trHttpBinding">
+<http:address location="https://tpatil.mynet:8244/services/tr.trHttpsEndpoint"/>
+</wsdl:port>
+<wsdl:port name="trHttpsSoap11Endpoint" binding="tns:trSoap11Binding">
+<soap:address location="https://tpatil.mynet:8244/services/tr.trHttpsSoap11Endpoint"/>
+</wsdl:port>
+<wsdl:port name="trHttpSoap11Endpoint" binding="tns:trSoap11Binding">
+<soap:address location="http://tpatil.mynet:8281/services/tr.trHttpSoap11Endpoint"/>
+</wsdl:port>
+<wsdl:port name="trHttpSoap12Endpoint" binding="tns:trSoap12Binding">
+<soap12:address location="http://localhost:8099/mocktrSoap12Binding"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

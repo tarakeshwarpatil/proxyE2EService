@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="c8cb0bd7-d6c6-4150-b4e1-38580519cf14" activeEnvironment="Default" name="confluence" resourceRoot="" soapui-version="5.2.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="fa8ac201-60d7-4ef1-99f3-fcf956819bad" wsaVersion="NONE" name="trSoap12Binding" type="wsdl" bindingName="{http://ws.apache.org/axis2}trSoap12Binding" soapVersion="1_2" anonymous="optional" definition="file:/Users/tpatil/Desktop/wso2/transformer/confluence.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://localhost:8099/mocktrSoap12Binding</con:endpoint><con:endpoint>http://tpatil.mynet:8099/mocktrSoap12Binding</con:endpoint></con:endpoints><con:operation id="56e7838b-8d21-4fdd-89cf-f4d9b53c578e" isOneWay="false" action="urn:mediate" name="mediate" bindingOperationName="mediate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ffe8a1de-2ea2-402c-b794-c5d74b350b32" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://tpatil.mynet:8281/services/confluence</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+   <soap:Header/>
+   <soap:Body>
+      <Account>
+         <!--Optional:-->
+         <AccountId>1234</AccountId>
+         <!--Optional:-->
+         <UserName>?</UserName>
+         <!--Optional:-->
+         <EmailAddress>?</EmailAddress>
+         <!--Optional:-->
+         <Status>?</Status>
+         <!--Optional:-->
+         <Processed>?</Processed>
+      </Account>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:mediate"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="95cae1e0-bfd3-47b7-804c-11d88c8c5d21" wsaVersion="NONE" name="trSoap11Binding" type="wsdl" bindingName="{http://ws.apache.org/axis2}trSoap11Binding" soapVersion="1_1" anonymous="optional" definition="file:/Users/tpatil/Desktop/wso2/transformer/confluence.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/Users/tpatil/Desktop/wso2/transformer/confluence.wsdl"><con:part><con:url>file:/Users/tpatil/Desktop/wso2/transformer/confluence.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://ws.apache.org/axis2" xmlns:ns="http://ws.apache.org/ns/synapse" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.apache.org/axis2" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+  <wsdl:types/>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified">
+      <xs:element name="Account">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="AccountId" type="xs:string"/>
+            <xs:element minOccurs="0" name="UserName" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmailAddress" type="xs:string"/>
+            <xs:element minOccurs="0" name="Status" type="xs:string"/>
+            <xs:element minOccurs="0" name="Processed" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="in">
+    <wsdl:part name="parameters" element="Account"/>
+  </wsdl:message>
+  <wsdl:message name="out"/>
+  <wsdl:portType name="trPortType">
+    <wsdl:operation name="mediate">
+      <wsdl:input message="tns:in" wsaw:Action="urn:mediate"/>
+      <wsdl:output message="tns:out" wsaw:Action="urn:mediateResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="trSoap11Binding" type="tns:trPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="mediate">
+      <soap:operation soapAction="urn:mediate" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trHttpBinding" type="tns:trPortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="mediate">
+      <http:operation location="mediate"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="trSoap12Binding" type="tns:trPortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="mediate">
+      <soap12:operation soapAction="urn:mediate" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="tr">
+    <wsdl:port name="trHttpsSoap12Endpoint" binding="tns:trSoap12Binding">
+      <soap12:address location="http://localhost:8099/mocktrSoap12Binding"/>
+    </wsdl:port>
+    <wsdl:port name="trHttpEndpoint" binding="tns:trHttpBinding">
+      <http:address location="http://tpatil.mynet:8281/services/tr.trHttpEndpoint"/>
+    </wsdl:port>
+    <wsdl:port name="trHttpsEndpoint" binding="tns:trHttpBinding">
+      <http:address location="https://tpatil.mynet:8244/services/tr.trHttpsEndpoint"/>
+    </wsdl:port>
+    <wsdl:port name="trHttpsSoap11Endpoint" binding="tns:trSoap11Binding">
+      <soap:address location="https://tpatil.mynet:8244/services/tr.trHttpsSoap11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="trHttpSoap11Endpoint" binding="tns:trSoap11Binding">
+      <soap:address location="http://tpatil.mynet:8281/services/tr.trHttpSoap11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="trHttpSoap12Endpoint" binding="tns:trSoap12Binding">
+      <soap12:address location="http://localhost:8099/mocktrSoap12Binding"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://tpatil.mynet:8281/services/tr.trHttpSoap11Endpoint</con:endpoint><con:endpoint>https://tpatil.mynet:8244/services/tr.trHttpsSoap11Endpoint</con:endpoint></con:endpoints><con:operation id="26127f45-35ac-4a84-a345-44a0de55c771" isOneWay="false" action="urn:mediate" name="mediate" bindingOperationName="mediate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2617ba42-1def-4ffe-a78e-5ced0db95c14" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://tpatil.mynet:8281/services/tr.trHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <Account>
+         <!--Optional:-->
+         <AccountId>?</AccountId>
+         <!--Optional:-->
+         <UserName>?</UserName>
+         <!--Optional:-->
+         <EmailAddress>?</EmailAddress>
+         <!--Optional:-->
+         <Status>?</Status>
+         <!--Optional:-->
+         <Processed>?</Processed>
+      </Account>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:mediate"/></con:call></con:operation></con:interface><con:mockService id="03822f03-7195-4e6b-bdea-7b44d523d4d3" port="8099" path="/mocktrSoap12Binding" host="localhost" name="trSoap12Binding MockService" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="mediate" id="b20ab88b-b2d3-4005-857a-863557f228d1" interface="trSoap12Binding" operation="mediate"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="225916d6-1e71-48d0-b4cf-af9627d264a3" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+   <soap:Header/>
+   <soap:Body>
+         <Account>
+         <!--Optional:-->
+         <AccountId>1234</AccountId>
+         <!--Optional:-->
+         <UserName>tpatil</UserName>
+         <!--Optional:-->
+         <EmailAddress>tarakeshwar.patil@gmail.com</EmailAddress>
+         <!--Optional:-->
+         <Status>Active</Status>
+         <!--Optional:-->
+         <Processed>True</Processed>
+      </Account>
+      </soap:Body>
+</soap:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:mediateResponse"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

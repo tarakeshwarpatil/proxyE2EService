@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="confluence" startOnLoad="true" transports="https http" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <!--logging incoming message -->
+            <log level="custom">
+                <property name="ProxyInvoked" value=" -------yes-----"/>
+            </log>
+            <log>
+                <property expression="$body//Account/AccountId" name="AccountId"/>
+            </log>
+            <log level="full"/>
+            <!-- invoking service -->
+            <property name="SOAPAction" scope="transport" type="STRING" value="urn:mediate"/>
+            <send>
+                <endpoint>
+                    <address format="soap12" statistics="enable" trace="enable" uri="http://localhost:8099/mocktrSoap12Binding"/>
+                </endpoint>
+            </send>
+        </inSequence>
+        <outSequence>
+            <log level="full"/>
+            <xslt key="transform.xslt"/>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </target>
+</proxy>

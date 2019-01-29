@@ -1,0 +1,17 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+   <soap:Header/>
+   <soap:Body>
+      <Account>
+         <!--Optional:-->
+         <AccountId>1234</AccountId>
+         <!--Optional:-->
+         <UserName>?</UserName>
+         <!--Optional:-->
+         <EmailAddress>?</EmailAddress>
+         <!--Optional:-->
+         <Status>?</Status>
+         <!--Optional:-->
+         <Processed>?</Processed>
+      </Account>
+   </soap:Body>
+</soap:Envelope>
